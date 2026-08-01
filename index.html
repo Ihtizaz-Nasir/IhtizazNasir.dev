@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ihtizaz Nasir — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1117;
+    --surface: #131a22;
+    --surface-2: #1b2430;
+    --line: #263140;
+    --text: #e6edf3;
+    --muted: #8b98a8;
+    --accent: #5eead4;     /* mint/teal */
+    --accent-2: #fbbf24;   /* amber */
+    --accent-dim: #2dd4bf22;
+    --danger: #f97066;
+    --radius: 10px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      radial-gradient(1200px 600px at 85% -10%, #123 0%, transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background: var(--accent); color:#04201c; }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------- layout shell ---------- */
+  .wrap{ max-width: 980px; margin:0 auto; padding: 0 24px; }
+
+  header.nav{
+    position: sticky; top:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(13,17,23,0.75);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 24px; max-width: 980px; margin:0 auto;
+  }
+  .brand{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:15px; display:flex; align-items:center; gap:8px; }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+  nav.links{ display:flex; gap: 22px; font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--muted); }
+  nav.links a{ transition: color .15s ease; white-space:nowrap; }
+  nav.links a:hover{ color: var(--accent); }
+  .nav-cta{
+    border:1px solid var(--line); padding:7px 14px; border-radius: 6px; font-size:12px;
+    color: var(--accent); font-family:'JetBrains Mono',monospace;
+  }
+  .nav-cta:hover{ border-color: var(--accent); }
+  @media (max-width: 720px){ nav.links{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{ padding: 88px 0 64px; }
+  .term{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px; background: var(--surface-2);
+    border-bottom:1px solid var(--line);
+  }
+  .term-bar span{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .term-bar .r{ background:#ff5f56; } .term-bar .y{ background:#ffbd2e; } .term-bar .g{ background:#27c93f; }
+  .term-title{ margin-left:8px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .term-body{ padding: 26px 28px 32px; font-family:'JetBrains Mono',monospace; font-size: 14px; }
+  .term-body .line{ color: var(--muted); margin-bottom: 6px; }
+  .term-body .prompt{ color: var(--accent); }
+  .term-body .path{ color: var(--accent-2); }
+
+  h1.name{
+    font-family:'JetBrains Mono',monospace;
+    font-weight: 800;
+    font-size: clamp(32px, 6vw, 54px);
+    letter-spacing: -0.02em;
+    margin: 14px 0 6px;
+    color: var(--text);
+  }
+  .role{
+    font-size: clamp(15px, 2.4vw, 18px);
+    color: var(--accent);
+    font-family:'JetBrains Mono',monospace;
+    margin-bottom: 18px;
+  }
+  .caret{ display:inline-block; width:10px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s step-end infinite; margin-left:2px; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .bio{ color: var(--muted); max-width: 620px; font-size: 15.5px; }
+
+  .hero-actions{ display:flex; gap:12px; margin-top: 26px; flex-wrap:wrap; }
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size: 13px; padding: 11px 18px; border-radius: 7px;
+    display:inline-flex; align-items:center; gap:8px; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn.primary{ background: var(--accent); color:#04201c; font-weight:700; }
+  .btn.primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px -8px var(--accent); }
+  .btn.ghost{ border:1px solid var(--line); color: var(--text); }
+  .btn.ghost:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* ---------- section shell w/ tab header ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--line); }
+  .tab{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--muted);
+    background: var(--surface); border:1px solid var(--line); border-bottom:none;
+    padding: 8px 16px; border-radius: 8px 8px 0 0; margin-bottom:-1px;
+  }
+  .tab .n{ color: var(--accent-2); }
+  .card-shell{
+    border:1px solid var(--line); border-radius: 0 10px 10px 10px; background: var(--surface);
+    padding: 28px;
+  }
+  h2.sec-title{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size: 22px; margin-bottom: 6px;
+  }
+  .sec-sub{ color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+
+  /* about */
+  .about-grid{ display:grid; grid-template-columns: 1fr; gap: 18px; }
+  .about-grid p{ color: var(--muted); font-size: 15px; }
+  .about-grid strong{ color: var(--text); }
+
+  /* education */
+  .edu-item{
+    display:grid; grid-template-columns: 100px 1fr; gap: 18px; padding: 18px 0;
+  }
+  .edu-item + .edu-item{ border-top: 1px solid var(--line); }
+  .edu-year{ font-family:'JetBrains Mono',monospace; color: var(--accent-2); font-size:13px; }
+  .edu-degree{ font-weight:700; font-size:16px; margin-bottom:2px; }
+  .edu-school{ color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace;
+    font-size: 11.5px; color: var(--accent); border:1px solid var(--accent-dim); background: var(--accent-dim);
+    padding: 4px 10px; border-radius: 100px; margin-right: 8px; margin-top:4px;
+  }
+  @media (max-width: 560px){ .edu-item{ grid-template-columns: 1fr; } }
+
+  /* experience */
+  .exp-item{ display:flex; gap:18px; padding: 18px 0; }
+  .exp-item + .exp-item{ border-top:1px solid var(--line); }
+  .exp-marker{ font-family:'JetBrains Mono',monospace; color: var(--accent); font-size:13px; padding-top:2px; white-space:nowrap; }
+  .exp-role{ font-weight:700; font-size:16px; }
+  .exp-org{ color: var(--accent-2); font-size: 13.5px; font-family:'JetBrains Mono',monospace; margin-bottom:8px; }
+  .exp-desc{ color: var(--muted); font-size: 14.5px; }
+
+  /* skills */
+  .skill-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 14px; }
+  .skill-card{
+    border:1px solid var(--line); border-radius: 8px; padding: 16px; background: var(--surface-2);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .skill-card:hover{ border-color: var(--accent); transform: translateY(-3px); }
+  .skill-name{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size: 14.5px; margin-bottom:4px; }
+  .skill-tag{ font-size: 12px; color: var(--muted); }
+
+  /* projects */
+  .proj-grid{ display:grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 720px){ .proj-grid{ grid-template-columns: 1fr 1fr; } }
+  .proj-card{
+    border:1px solid var(--line); border-radius: 10px; padding: 22px; background: var(--surface-2);
+    display:flex; flex-direction:column; gap: 10px; transition: border-color .15s ease, transform .15s ease;
+  }
+  .proj-card:hover{ border-color: var(--accent); transform: translateY(-3px); }
+  .proj-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .proj-name{ font-weight:700; font-size:16px; }
+  .proj-tag{
+    font-family:'JetBrains Mono',monospace; font-size: 10.5px; color: var(--accent-2);
+    border:1px solid var(--accent-2); padding: 3px 8px; border-radius:100px; white-space:nowrap;
+  }
+  .proj-desc{ color: var(--muted); font-size: 14px; flex:1; }
+  .proj-stack{ font-family:'JetBrains Mono',monospace; font-size: 11.5px; color: var(--accent); }
+
+  /* contact */
+  .contact-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .contact-card{
+    display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:8px;
+    padding: 16px; background: var(--surface-2); transition: border-color .15s ease, transform .15s ease;
+  }
+  .contact-card:hover{ border-color: var(--accent); transform: translateY(-3px); }
+  .c-icon{
+    width:38px; height:38px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background: var(--accent-dim); color: var(--accent); flex-shrink:0;
+  }
+  .c-label{ font-size: 11px; color: var(--muted); font-family:'JetBrains Mono',monospace; }
+  .c-value{ font-weight:600; font-size: 14px; word-break: break-word; }
+
+  footer{ padding: 40px 0 60px; text-align:center; color: var(--muted); font-size: 12.5px; font-family:'JetBrains Mono',monospace; }
+  footer .dot{ color: var(--accent); }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> ihtizaz<span style="color:var(--muted)">.dev</span></div>
+    <nav class="links">
+      <a href="#about">about</a>
+      <a href="#education">education</a>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a class="nav-cta cv-btn" href="Ihtizaz_Nasir_CV.pdf" download>⬇ download cv</a>
+      <a class="nav-cta" href="#contact">$ contact --now</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none; padding-bottom:0;">
+    <div class="term">
+      <div class="term-bar">
+        <span class="r"></span><span class="y"></span><span class="g"></span>
+        <span class="term-title">ihtizaz@portfolio: ~</span>
+      </div>
+      <div class="term-body">
+        <div class="line"><span class="prompt">$</span> whoami</div>
+      </div>
+    </div>
+
+    <h1 class="name">Ihtizaz Nasir<span class="caret"></span></h1>
+    <p class="role">software engineering student · flutter &amp; dart developer · freelancer</p>
+    <p class="bio">
+      BSc Software Engineering student at COMSATS University, building cross-platform apps with
+      Flutter and Dart, shipping WordPress sites, and taking on freelance work through Upwork and Fiverr.
+      Comfortable moving between Java, C, and mobile app development — currently interning at Internee.pk.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn primary" href="Ihtizaz_Nasir_CV.pdf" download>⬇ download cv</a>
+      <a class="btn ghost" href="#projects">$ view projects</a>
+      <a class="btn ghost" href="mailto:ihtizaznasir342@gmail.com">$ say hello</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="tab"><span class="n">01</span> cat about.md</div>
+    <div class="card-shell">
+      <h2 class="sec-title">About</h2>
+      <p class="sec-sub">The short version, in plain text.</p>
+      <div class="about-grid">
+        <p>
+          I'm <strong>Ihtizaz Nasir</strong>, a Software Engineering student at
+          <strong>COMSATS University</strong>. My work sits at the intersection of mobile app
+          development and freelance client work — I build with <strong>Flutter and Dart</strong>,
+          maintain and customize <strong>WordPress</strong> sites, and pick up backend and systems
+          work in <strong>Java and C</strong> when a project calls for it.
+        </p>
+        <p>
+          Outside coursework, I freelance on <strong>Upwork and Fiverr</strong>, and I'm currently
+          getting hands-on industry experience as an <strong>Internee at Internee.pk</strong>. I like
+          projects that force me to ship something real end-to-end — my multi-vendor hotel management
+          app was one of those.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="tab"><span class="n">02</span> cat education.log</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Education</h2>
+      <p class="sec-sub">Academic background.</p>
+
+      <div class="edu-item">
+        <div class="edu-year mono">Ongoing</div>
+        <div>
+          <div class="edu-degree">BSc Software Engineering</div>
+          <div class="edu-school">COMSATS University</div>
+          <span class="badge">★ 3rd Position — App Development Competition</span>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year mono">FSc</div>
+        <div>
+          <div class="edu-degree">FSc (Pre-Engineering)</div>
+          <div class="edu-school">Cadet College Karnal Sher Khan Campus</div>
+          <span class="badge">★ Honor Roll</span>
+          <span class="badge">★ Academic Excellence Award</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="tab"><span class="n">03</span> ps -ef | grep experience</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Experience</h2>
+      <p class="sec-sub">Where I've been putting the skills to work.</p>
+
+      <div class="exp-item">
+        <div class="exp-marker">&gt;_</div>
+        <div>
+          <div class="exp-role">Internee</div>
+          <div class="exp-org">Internee.pk</div>
+          <div class="exp-desc">Working on real-world software engineering tasks as part of a structured internship program, building practical experience alongside coursework.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-marker">&gt;_</div>
+        <div>
+          <div class="exp-role">Freelance Developer</div>
+          <div class="exp-org">Upwork &amp; Fiverr</div>
+          <div class="exp-desc">Delivering client projects spanning WordPress sites and Flutter app development — from initial requirements to final handoff.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="tab"><span class="n">04</span> cat skills.json</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Skills</h2>
+      <p class="sec-sub">Languages, frameworks, and tools I build with.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">Flutter</div><div class="skill-tag">Cross-platform app development</div></div>
+        <div class="skill-card"><div class="skill-name">Dart</div><div class="skill-tag">App logic &amp; UI</div></div>
+        <div class="skill-card"><div class="skill-name">Java</div><div class="skill-tag">Application &amp; backend logic</div></div>
+        <div class="skill-card"><div class="skill-name">C</div><div class="skill-tag">Core programming fundamentals</div></div>
+        <div class="skill-card"><div class="skill-name">WordPress</div><div class="skill-tag">Site builds &amp; customization</div></div>
+        <div class="skill-card"><div class="skill-name">Freelancing</div><div class="skill-tag">Upwork &amp; Fiverr client delivery</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="tab"><span class="n">05</span> ls ./projects</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Projects</h2>
+      <p class="sec-sub">Things I've built and shipped.</p>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-name">Multi-Vendor Hotel Management App</div>
+            <div class="proj-tag">Flutter</div>
+          </div>
+          <div class="proj-desc">A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system.</div>
+          <div class="proj-stack">Flutter · Dart</div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-head">
+            <div class="proj-name">App Development Competition — 3rd Place</div>
+            <div class="proj-tag">Competition</div>
+          </div>
+          <div class="proj-desc">Placed 3rd in an app development competition, building and presenting a working app under a fixed timeline.</div>
+          <div class="proj-stack">Flutter · Dart</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="tab"><span class="n">06</span> cat contact.txt</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Contact</h2>
+      <p class="sec-sub">Open to internships, freelance work, and collaboration.</p>
+      <div class="contact-grid">
+
+        <a class="contact-card" href="mailto:ihtizaznasir342@gmail.com">
+          <div class="c-icon">✉</div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-value">ihtizaznasir342@gmail.com</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="tel:03414455158">
+          <div class="c-icon">☎</div>
+          <div>
+            <div class="c-label">Phone</div>
+            <div class="c-value">0341 4455158</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://github.com/ihtizaznasir" target="_blank" rel="noopener">
+          <div class="c-icon">⌥</div>
+          <div>
+            <div class="c-label">GitHub</div>
+            <div class="c-value">github.com/ihtizaznasir</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://linkedin.com/in/ihtizaznasir" target="_blank" rel="noopener">
+          <div class="c-icon">in</div>
+          <div>
+            <div class="c-label">LinkedIn</div>
+            <div class="c-value">linkedin.com/in/ihtizaznasir</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  built by Ihtizaz Nasir <span class="dot">·</span> <span id="year"></span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // scroll reveal
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(i=> io.observe(i));
+</script>
+
+</body>
+</html>
