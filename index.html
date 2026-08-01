@@ -180,7 +180,7 @@
 
   /* projects */
   .proj-grid{ display:grid; grid-template-columns: 1fr; gap: 18px; }
-  @media (min-width: 720px){ .proj-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 720px){ .proj-grid{ grid-template-columns: repeat(auto-fit, minmax(280px, 420px)); } }
   .proj-card{
     border:1px solid var(--line); border-radius: 10px; padding: 22px; background: var(--surface-2);
     display:flex; flex-direction:column; gap: 10px; transition: border-color .15s ease, transform .15s ease;
@@ -227,6 +227,7 @@
       <a href="#education">education</a>
       <a href="#experience">experience</a>
       <a href="#skills">skills</a>
+      <a href="#courses">courses</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
     </nav>
@@ -302,7 +303,7 @@
         <div>
           <div class="edu-degree">BSc Software Engineering</div>
           <div class="edu-school">COMSATS University</div>
-          <span class="badge">★ 3rd Position — App Development Competition</span>
+          <span class="badge">★ Honor Roll</span>
         </div>
       </div>
 
@@ -311,7 +312,6 @@
         <div>
           <div class="edu-degree">FSc (Pre-Engineering)</div>
           <div class="edu-school">Cadet College Karnal Sher Khan Campus</div>
-          <span class="badge">★ Honor Roll</span>
           <span class="badge">★ Academic Excellence Award</span>
         </div>
       </div>
@@ -362,9 +362,26 @@
     </div>
   </section>
 
+  <!-- COURSES -->
+  <section id="courses" class="reveal">
+    <div class="tab"><span class="n">05</span> cat courses.json</div>
+    <div class="card-shell">
+      <h2 class="sec-title">Courses &amp; Certifications</h2>
+      <p class="sec-sub">Learning outside the classroom.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">Freelancing</div><div class="skill-tag">DigiSkills</div></div>
+        <div class="skill-card"><div class="skill-name">WordPress Development</div><div class="skill-tag">DigiSkills</div></div>
+        <div class="skill-card"><div class="skill-name">Entrepreneurship</div><div class="skill-tag">Coursera</div></div>
+        <div class="skill-card"><div class="skill-name">IELTS</div><div class="skill-tag">Preparation Course</div></div>
+        <div class="skill-card"><div class="skill-name">Git &amp; GitHub</div><div class="skill-tag">Version Control</div></div>
+        <div class="skill-card"><div class="skill-name">Flutter App Development</div><div class="skill-tag">Mobile Development</div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section id="projects" class="reveal">
-    <div class="tab"><span class="n">05</span> ls ./projects</div>
+    <div class="tab"><span class="n">06</span> ls ./projects</div>
     <div class="card-shell">
       <h2 class="sec-title">Projects</h2>
       <p class="sec-sub">Things I've built and shipped.</p>
@@ -372,18 +389,9 @@
         <div class="proj-card">
           <div class="proj-head">
             <div class="proj-name">Multi-Vendor Hotel Management App</div>
-            <div class="proj-tag">Flutter</div>
+            <div class="proj-tag">★ 3rd Place</div>
           </div>
-          <div class="proj-desc">A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system.</div>
-          <div class="proj-stack">Flutter · Dart</div>
-        </div>
-
-        <div class="proj-card">
-          <div class="proj-head">
-            <div class="proj-name">App Development Competition — 3rd Place</div>
-            <div class="proj-tag">Competition</div>
-          </div>
-          <div class="proj-desc">Placed 3rd in an app development competition, building and presenting a working app under a fixed timeline.</div>
+          <div class="proj-desc">A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system. Placed 3rd in an app development competition.</div>
           <div class="proj-stack">Flutter · Dart</div>
         </div>
       </div>
@@ -392,7 +400,7 @@
 
   <!-- CONTACT -->
   <section id="contact" class="reveal">
-    <div class="tab"><span class="n">06</span> cat contact.txt</div>
+    <div class="tab"><span class="n">07</span> cat contact.txt</div>
     <div class="card-shell">
       <h2 class="sec-title">Contact</h2>
       <p class="sec-sub">Open to internships, freelance work, and collaboration.</p>
