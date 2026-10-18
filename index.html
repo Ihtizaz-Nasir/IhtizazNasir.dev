@@ -6,333 +6,256 @@
 <title>Ihtizaz Nasir — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f3f6fb;
-    --panel:#ffffff;
-    --ink:#0e1a3a;
-    --muted:#55627e;
-    --line:#d9e1ee;
-    --blue:#0b57d0;
-    --sky:#4cc2f6;
-    --sky-soft:#dff3fd;
-    --deep:#0e1a3a;
-    --on-deep:#eaf1ff;
-    --r-lg:28px;
-    --r-md:14px;
-    --display:'Bricolage Grotesque','Segoe UI',sans-serif;
-    --body:'Figtree','Segoe UI',sans-serif;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0a1124; --panel:#111b36; --ink:#e8eefc; --muted:#9aa8c7; --line:#223056;
-      --blue:#6ea8ff; --sky:#4cc2f6; --sky-soft:#12304a; --deep:#16244a; --on-deep:#eaf1ff;
-    }
+    --bg:#e4efe9;
+    --ink:#10261f;
+    --muted:#4d6a60;
+    --white:#ffffff;
+    --violet:#0a7a5b;
+    --violet-soft:#c6e6da;
+    --coral:#f4a9c4;
+    --sun:#f6d55c;
+    --display:'Unbounded','Trebuchet MS',sans-serif;
+    --body:'DM Sans','Segoe UI',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  body{background:#07120e;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  :focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px}
-  ::selection{background:var(--sky);color:#04112b}
+  :focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:8px}
+  ::selection{background:var(--violet);color:#fff}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-  /* ---------- shell ---------- */
-  .shell{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1180px;margin:0 auto}
-  aside{
-    position:sticky;top:0;height:100vh;padding:40px 28px 32px 32px;
-    display:flex;flex-direction:column;justify-content:space-between;
-    border-right:1px solid var(--line);
+  /* floating pill nav */
+  .nav{
+    position:sticky;top:14px;z-index:30;width:fit-content;max-width:calc(100% - 24px);margin:14px auto 0;
+    display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;
+    background:rgba(255,255,255,.85);backdrop-filter:blur(12px);box-shadow:0 10px 30px -12px rgba(16,38,31,.3);
+    overflow-x:auto;scrollbar-width:none;
   }
-  .brand{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.1;letter-spacing:-.01em}
-  .brand small{display:block;margin-top:6px;font:500 14px/1.4 var(--body);color:var(--muted);letter-spacing:0}
-  .side-nav{display:flex;flex-direction:column;gap:4px;margin:36px 0}
-  .side-nav a{
-    font-weight:500;font-size:16px;color:var(--muted);padding:7px 12px;margin-left:-12px;border-radius:10px;
-    transition:background .15s,color .15s;
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap;transition:background .15s,color .15s}
+  .nav a:hover{background:var(--violet-soft)}
+  .nav a.cta{background:var(--ink);color:#fff;margin-left:4px}
+  .nav a.cta:hover{background:var(--violet)}
+
+  .grid{
+    max-width:1120px;margin:28px auto 0;padding:0 20px 24px;
+    display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;
   }
-  .side-nav a:hover{background:var(--sky-soft);color:var(--ink)}
-  .side-nav a.on{background:var(--sky-soft);color:var(--blue);font-weight:600}
-  .cv{
-    display:inline-block;background:var(--ink);color:var(--paper);font-weight:600;font-size:15px;
-    padding:12px 20px;border-radius:999px;text-align:center;transition:transform .15s;
-  }
-  .cv:hover{transform:translateY(-2px)}
+  .card{background:var(--white);border-radius:26px;padding:30px;scroll-margin-top:90px}
+  .card h2{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.2;letter-spacing:-.01em;margin-bottom:18px}
+  .card p{color:var(--muted)}
+  .card strong{color:var(--ink);font-weight:600}
 
-  main{padding:0 40px 40px 56px}
-  section{padding:72px 0 8px}
-  h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin-bottom:28px}
-  p{max-width:62ch}
+  /* hero */
+  .hero{grid-column:span 8;padding:44px 40px;border-radius:36px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:420px}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7.4vw,84px);line-height:.98;letter-spacing:-.045em}
+  .role{margin-top:18px;font-size:19px;font-weight:600;color:var(--violet)}
+  .bio{margin-top:10px;max-width:56ch}
+  .actions{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{font-weight:700;font-size:15px;padding:13px 24px;border-radius:999px;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.solid{background:var(--violet);color:#fff}
+  .btn.ghost{background:var(--bg)}
 
-  /* ---------- hero ---------- */
-  .hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:40px;align-items:center;padding-top:72px}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,8vw,92px);line-height:.95;letter-spacing:-.04em}
-  .role{margin:22px 0 14px;font-size:19px;font-weight:600;color:var(--blue)}
-  .bio{color:var(--muted)}
-  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-  .btn{font-weight:600;font-size:15px;padding:12px 22px;border-radius:999px;border:1.5px solid var(--ink);transition:background .15s,color .15s}
-  .btn.fill{background:var(--blue);border-color:var(--blue);color:#fff}
-  .btn.fill:hover{filter:brightness(1.1)}
-  .btn.line:hover{background:var(--ink);color:var(--paper)}
+  /* status */
+  .status{grid-column:span 4;background:var(--sun);border-radius:36px;display:flex;flex-direction:column;justify-content:space-between;padding:34px}
+  .status .big{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.2vw,36px);line-height:1.1;letter-spacing:-.03em}
+  .status p{color:var(--ink);font-weight:500}
+  .pulse{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;background:var(--white);padding:8px 16px;border-radius:999px;width:fit-content}
+  .pulse i{width:10px;height:10px;border-radius:50%;background:#0a7a5b;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(10,122,91,.2)}}
 
-  /* phone (the one memorable thing) */
-  .phone{
-    width:230px;height:440px;margin:0 auto;border-radius:36px;background:var(--deep);padding:10px;
-    box-shadow:0 30px 60px -24px rgba(11,87,208,.5);transform:rotate(4deg);animation:rise .9s cubic-bezier(.2,.8,.2,1) both;
-  }
-  @keyframes rise{from{opacity:0;transform:translateY(30px) rotate(0)}to{opacity:1;transform:rotate(4deg)}}
-  .screen{height:100%;border-radius:28px;background:var(--paper);padding:16px 14px;overflow:hidden;position:relative}
-  .notch{width:60px;height:16px;border-radius:10px;background:var(--deep);margin:-6px auto 14px}
-  .s-title{font-family:var(--display);font-weight:700;font-size:17px;margin-bottom:10px;color:var(--ink)}
-  .s-card{background:var(--panel);border-radius:14px;padding:8px;margin-bottom:10px;border:1px solid var(--line)}
-  .s-img{height:78px;border-radius:9px}
-  .i1{background:linear-gradient(135deg,#0b57d0,#4cc2f6)}
-  .i2{background:linear-gradient(135deg,#4cc2f6,#c5ecff);height:58px}
-  .s-line{height:7px;border-radius:5px;background:var(--line);margin-top:8px;width:70%}
-  .s-line.s{width:40%}
-  .s-btn{position:absolute;left:14px;right:14px;bottom:16px;height:34px;border-radius:12px;background:var(--blue);color:#fff;font:600 12px/34px var(--body);text-align:center}
-  @media (max-width:1000px){.hero{grid-template-columns:1fr}.phone{display:none}}
+  .about{grid-column:span 7;display:grid;gap:14px}
+  .edu{grid-column:span 5;background:var(--violet);color:#fff}
+  .edu h2{color:#fff}
+  .edu-item + .edu-item{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.25)}
+  .edu-deg{font-weight:700;font-size:18px;line-height:1.3}
+  .edu-sch{color:#c9eadd;font-size:15.5px;margin-bottom:10px}
+  .tag{display:inline-block;background:rgba(255,255,255,.18);font-weight:600;font-size:14px;padding:5px 14px;border-radius:999px}
 
-  /* ---------- about ---------- */
-  .about{display:grid;gap:18px;color:var(--muted)}
-  .about strong{color:var(--ink);font-weight:600}
-
-  /* ---------- timeline (experience is a real sequence) ---------- */
-  .timeline{list-style:none;position:relative;padding-left:30px}
-  .timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
-  .timeline li{position:relative;padding-bottom:30px}
-  .timeline li:last-child{padding-bottom:0}
-  .timeline li::before{content:"";position:absolute;left:-30px;top:7px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:3px solid var(--blue)}
-  .t-role{font-family:var(--display);font-weight:700;font-size:21px;line-height:1.2}
-  .t-org{color:var(--blue);font-weight:600;margin-bottom:6px}
-  .t-desc{color:var(--muted)}
-
-  /* ---------- education ---------- */
-  .edu{display:grid;gap:16px}
-  .edu-row{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
-  .edu-deg{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25}
-  .edu-sch{color:var(--muted);font-size:15.5px}
-  .award{background:var(--sky-soft);color:var(--blue);font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
-
-  /* ---------- skills ---------- */
+  .exp{grid-column:span 6}
+  .job + .job{margin-top:20px;padding-top:20px;border-top:2px dashed var(--violet-soft)}
+  .job b{display:block;font-family:var(--display);font-weight:500;font-size:16px;line-height:1.3}
+  .job span{display:block;color:var(--violet);font-weight:700;margin:2px 0 6px}
+  .skills{grid-column:span 6}
   .chips{display:flex;flex-wrap:wrap;gap:10px}
-  .chip{font-weight:600;font-size:16px;padding:9px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel)}
-  .chip.core{background:var(--blue);border-color:var(--blue);color:#fff}
-  .chip small{font-weight:500;opacity:.75;margin-left:6px;font-size:14px}
-  .hint{color:var(--muted);font-size:15px;margin-top:14px}
+  .chip{font-weight:600;padding:9px 18px;border-radius:999px;background:var(--bg)}
+  .chip.core{background:var(--ink);color:#fff}
+  .chip.core:nth-child(2){background:var(--violet)}
+  .skills .note{margin-top:14px;font-size:15px}
 
-  /* ---------- courses ---------- */
-  .courses{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
-  .courses li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:500}
-  .courses span{color:var(--muted);font-weight:400;text-align:right}
-  @media (max-width:700px){.courses{grid-template-columns:1fr}}
-
-  /* ---------- project ---------- */
-  .project{background:var(--deep);color:var(--on-deep);border-radius:var(--r-lg);padding:40px;position:relative;overflow:hidden}
-  .project::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(76,194,246,.45),transparent 70%)}
-  .place{display:inline-block;background:var(--sky);color:#04112b;font-weight:700;font-size:14px;padding:6px 14px;border-radius:999px;margin-bottom:18px;position:relative;z-index:1}
-  .project h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-.02em;margin-bottom:14px;position:relative;z-index:1}
-  .project p{color:#c3d1f0;position:relative;z-index:1}
-  .stack{display:flex;gap:10px;margin-top:22px;position:relative;z-index:1}
-  .stack span{border:1.5px solid rgba(255,255,255,.35);padding:5px 16px;border-radius:999px;font-weight:600;font-size:14.5px}
-
-  /* ---------- contact ---------- */
-  .contact{list-style:none}
-  .contact li{border-top:1px solid var(--line)}
-  .contact li:last-child{border-bottom:1px solid var(--line)}
-  .contact a{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 20px;padding:20px 4px;transition:padding .2s,color .2s}
-  .contact a:hover{padding-left:16px;color:var(--blue)}
-  .c-name{color:var(--muted);font-size:15px;font-weight:500}
-  .c-val{font-family:var(--display);font-weight:700;font-size:clamp(18px,3vw,26px);word-break:break-word}
-
-  footer{padding:56px 0 8px;color:var(--muted);font-size:14.5px}
-
-  /* ---------- small screens ---------- */
-  @media (max-width:860px){
-    .shell{display:block}
-    aside{
-      position:sticky;height:auto;flex-direction:row;align-items:center;gap:16px;padding:12px 20px;
-      background:var(--paper);border-right:none;border-bottom:1px solid var(--line);z-index:20;
-    }
-    .brand small,.cv{display:none}
-    .side-nav{flex-direction:row;margin:0;overflow-x:auto;gap:2px;scrollbar-width:none}
-    .side-nav::-webkit-scrollbar{display:none}
-    .side-nav a{white-space:nowrap;margin:0;padding:6px 12px;font-size:15px}
-    main{padding:0 20px 32px}
-    .hero{padding-top:44px}
-    .project{padding:28px}
+  /* project */
+  .proj{grid-column:span 12;background:#12302a;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:36px;padding:44px 40px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:30px;align-items:center;overflow:hidden;position:relative}
+  .proj h2{color:var(--sun)}
+  .proj h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,42px);line-height:1.08;letter-spacing:-.035em;margin-bottom:16px}
+  .proj p{color:#b9d3c9}
+  .proj .stack{display:flex;gap:10px;margin-top:22px}
+  .proj .stack span{background:rgba(255,255,255,.12);padding:6px 16px;border-radius:999px;font-weight:600;font-size:15px}
+  .medal{
+    justify-self:center;width:210px;height:210px;border-radius:50%;background:var(--coral);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    font-family:var(--display);transform:rotate(-8deg);box-shadow:0 0 0 14px rgba(244,169,196,.3);
   }
+  .medal b{font-size:62px;font-weight:800;line-height:1;letter-spacing:-.05em}
+  .medal span{font-size:14px;font-weight:600;max-width:12ch;line-height:1.3;margin-top:6px}
+
+  .courses{grid-column:span 7}
+  .courses ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .courses li{background:var(--bg);border-radius:16px;padding:14px 16px;font-weight:600;line-height:1.35}
+  .courses li small{display:block;color:var(--muted);font-weight:500;font-size:14px}
+  .contact{grid-column:span 5;background:var(--coral);color:var(--ink)}
+  .contact p{color:var(--ink);margin-bottom:18px;font-weight:500}
+  .contact a{display:block;background:rgba(255,255,255,.9);border-radius:16px;padding:12px 16px;margin-top:10px;transition:transform .15s,background .15s}
+  .contact a:hover{transform:translateX(6px);background:#fff}
+  .contact small{display:block;font-size:13px;color:var(--muted);font-weight:500}
+  .contact span{font-weight:700;font-size:15.5px;word-break:break-word}
+
+  footer{text-align:center;color:#8fb0a3;font-size:14.5px;padding:8px 20px 44px}
+
+  @media (max-width:900px){
+    .hero,.status,.about,.edu,.exp,.skills,.courses,.contact{grid-column:span 12}
+    .hero{min-height:0;padding:34px 26px}
+    .proj{grid-template-columns:1fr;padding:34px 26px}
+    .medal{width:170px;height:170px}.medal b{font-size:50px}
+  }
+  @media (max-width:560px){.courses ul{grid-template-columns:1fr}.card{padding:24px}}
 </style>
 </head>
 <body>
-<div class="shell">
 
-  <aside>
-    <div class="brand">Ihtizaz Nasir<small>Software engineer</small></div>
-    <nav class="side-nav" aria-label="Sections">
-      <a href="#top" class="on">Intro</a>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#skills">Skills</a>
-      <a href="#courses">Courses</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="cv" href="IhtizaznasirCv.pdf" download>Download CV</a>
+<nav class="nav" aria-label="Sections">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#courses">Courses</a>
+  <a class="cta" href="#contact">Contact</a>
+</nav>
+
+<main class="grid">
+
+  <section class="card hero">
+    <div>
+      <h1>Ihtizaz Nasir</h1>
+      <p class="role">Software engineering student, Flutter and Dart developer, freelancer</p>
+      <p class="bio">
+        BSc Software Engineering student at COMSATS University, building cross-platform apps with
+        Flutter and Dart, shipping WordPress sites, and taking on freelance work through Upwork and Fiverr.
+        Comfortable moving between Java, C, and mobile app development — currently interning at Internee.pk.
+      </p>
+    </div>
+    <div class="actions">
+      <a class="btn solid" href="IhtizaznasirCv.pdf" download>Download CV</a>
+      <a class="btn ghost" href="#projects">View projects</a>
+      <a class="btn ghost" href="mailto:ihtizaznasir342@gmail.com">Say hello</a>
+    </div>
+  </section>
+
+  <aside class="card status">
+    <span class="pulse"><i></i>Available for work</span>
+    <div>
+      <div class="big">Interning at Internee.pk</div>
+      <p style="margin-top:10px">Open to internships, freelance work, and collaboration.</p>
+    </div>
   </aside>
 
-  <main id="top">
+  <section class="card about" id="about">
+    <h2>About</h2>
+    <p>
+      I’m <strong>Ihtizaz Nasir</strong>, a Software Engineering student at
+      <strong>COMSATS University</strong>. My work sits at the intersection of mobile app
+      development and freelance client work — I build with <strong>Flutter and Dart</strong>,
+      maintain and customize <strong>WordPress</strong> sites, and pick up backend and systems
+      work in <strong>Java and C</strong> when a project calls for it.
+    </p>
+    <p>
+      Outside coursework, I freelance on <strong>Upwork and Fiverr</strong>, and I’m currently
+      getting hands-on industry experience as an <strong>Internee at Internee.pk</strong>. I like
+      projects that force me to ship something real end-to-end — my multi-vendor hotel management
+      app was one of those.
+    </p>
+  </section>
 
-    <div class="hero">
-      <div>
-        <h1>Ihtizaz Nasir</h1>
-        <p class="role">Software engineering student, Flutter and Dart developer, freelancer</p>
-        <p class="bio">
-          BSc Software Engineering student at COMSATS University, building cross-platform apps with
-          Flutter and Dart, shipping WordPress sites, and taking on freelance work through Upwork and Fiverr.
-          Comfortable moving between Java, C, and mobile app development — currently interning at Internee.pk.
-        </p>
-        <div class="actions">
-          <a class="btn fill" href="#projects">View projects</a>
-          <a class="btn line" href="mailto:ihtizaznasir342@gmail.com">Say hello</a>
-          <a class="btn line" href="IhtizaznasirCv.pdf" download>Download CV</a>
-        </div>
-      </div>
-
-      <div class="phone" aria-hidden="true">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="s-title">Hotels</div>
-          <div class="s-card"><div class="s-img i1"></div><div class="s-line"></div><div class="s-line s"></div></div>
-          <div class="s-card"><div class="s-img i2"></div><div class="s-line"></div></div>
-          <div class="s-btn">Book now</div>
-        </div>
-      </div>
+  <section class="card edu" id="education">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <div class="edu-deg">BSc Software Engineering</div>
+      <div class="edu-sch">COMSATS University, ongoing</div>
+      <span class="tag">Honor Roll</span>
     </div>
+    <div class="edu-item">
+      <div class="edu-deg">FSc (Pre-Engineering)</div>
+      <div class="edu-sch">Cadet College Karnal Sher Khan Campus</div>
+      <span class="tag">Academic Excellence Award</span>
+    </div>
+  </section>
 
-    <section id="about">
-      <h2>About</h2>
-      <div class="about">
-        <p>
-          I’m <strong>Ihtizaz Nasir</strong>, a Software Engineering student at
-          <strong>COMSATS University</strong>. My work sits at the intersection of mobile app
-          development and freelance client work — I build with <strong>Flutter and Dart</strong>,
-          maintain and customize <strong>WordPress</strong> sites, and pick up backend and systems
-          work in <strong>Java and C</strong> when a project calls for it.
-        </p>
-        <p>
-          Outside coursework, I freelance on <strong>Upwork and Fiverr</strong>, and I’m currently
-          getting hands-on industry experience as an <strong>Internee at Internee.pk</strong>. I like
-          projects that force me to ship something real end-to-end — my multi-vendor hotel management
-          app was one of those.
-        </p>
-      </div>
-    </section>
+  <section class="card exp" id="experience">
+    <h2>Experience</h2>
+    <div class="job">
+      <b>Internee</b><span>Internee.pk</span>
+      <p>Working on real-world software engineering tasks as part of a structured internship program, building practical experience alongside coursework.</p>
+    </div>
+    <div class="job">
+      <b>Freelance Developer</b><span>Upwork and Fiverr</span>
+      <p>Delivering client projects spanning WordPress sites and Flutter app development — from initial requirements to final handoff.</p>
+    </div>
+  </section>
 
-    <section id="experience">
-      <h2>Experience</h2>
-      <ol class="timeline">
-        <li>
-          <div class="t-role">Internee</div>
-          <div class="t-org">Internee.pk</div>
-          <p class="t-desc">Working on real-world software engineering tasks as part of a structured internship program, building practical experience alongside coursework.</p>
-        </li>
-        <li>
-          <div class="t-role">Freelance Developer</div>
-          <div class="t-org">Upwork and Fiverr</div>
-          <p class="t-desc">Delivering client projects spanning WordPress sites and Flutter app development — from initial requirements to final handoff.</p>
-        </li>
-      </ol>
-    </section>
+  <section class="card skills" id="skills">
+    <h2>Skills</h2>
+    <div class="chips">
+      <span class="chip core">Flutter</span>
+      <span class="chip core">Dart</span>
+      <span class="chip">Java</span>
+      <span class="chip">C</span>
+      <span class="chip">WordPress</span>
+      <span class="chip">Freelancing</span>
+    </div>
+    <p class="note">Dark chips are my main stack: cross-platform apps, app logic and UI.</p>
+  </section>
 
-    <section id="education">
-      <h2>Education</h2>
-      <div class="edu">
-        <div class="edu-row">
-          <div>
-            <div class="edu-deg">BSc Software Engineering</div>
-            <div class="edu-sch">COMSATS University, ongoing</div>
-          </div>
-          <span class="award">Honor Roll</span>
-        </div>
-        <div class="edu-row">
-          <div>
-            <div class="edu-deg">FSc (Pre-Engineering)</div>
-            <div class="edu-sch">Cadet College Karnal Sher Khan Campus</div>
-          </div>
-          <span class="award">Academic Excellence Award</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="chips">
-        <span class="chip core">Flutter<small>cross-platform apps</small></span>
-        <span class="chip core">Dart<small>app logic and UI</small></span>
-        <span class="chip">Java</span>
-        <span class="chip">C</span>
-        <span class="chip">WordPress</span>
-        <span class="chip">Freelancing</span>
-      </div>
-      <p class="hint">Filled chips are my main stack.</p>
-    </section>
-
-    <section id="courses">
-      <h2>Courses and certifications</h2>
-      <ul class="courses">
-        <li>Freelancing <span>DigiSkills</span></li>
-        <li>WordPress Development <span>DigiSkills</span></li>
-        <li>Entrepreneurship <span>Coursera</span></li>
-        <li>IELTS <span>Preparation course</span></li>
-        <li>Git and GitHub <span>Version control</span></li>
-        <li>Flutter App Development <span>Mobile development</span></li>
-      </ul>
-    </section>
-
-    <section id="projects">
+  <section class="card proj" id="projects">
+    <div>
       <h2>Projects</h2>
-      <article class="project">
-        <span class="place">3rd place, app development competition</span>
-        <h3>Multi-Vendor Hotel Management App</h3>
-        <p>A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system.</p>
-        <div class="stack"><span>Flutter</span><span>Dart</span></div>
-      </article>
-    </section>
+      <h3>Multi-Vendor Hotel Management App</h3>
+      <p>A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system. Placed 3rd in an app development competition.</p>
+      <div class="stack"><span>Flutter</span><span>Dart</span></div>
+    </div>
+    <div class="medal" aria-label="Third place in an app development competition">
+      <b>3rd</b><span>place, app development competition</span>
+    </div>
+  </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p style="margin-bottom:24px;color:var(--muted)">Open to internships, freelance work, and collaboration.</p>
-      <ul class="contact">
-        <li><a href="mailto:ihtizaznasir342@gmail.com"><span class="c-name">Email</span><span class="c-val">ihtizaznasir342@gmail.com</span></a></li>
-        <li><a href="tel:03414455158"><span class="c-name">Phone</span><span class="c-val">0341 4455158</span></a></li>
-        <li><a href="https://github.com/ihtizaznasir" target="_blank" rel="noopener"><span class="c-name">GitHub</span><span class="c-val">github.com/ihtizaznasir</span></a></li>
-        <li><a href="https://www.linkedin.com/in/ihtizaz-nasir-wp" target="_blank" rel="noopener"><span class="c-name">LinkedIn</span><span class="c-val">linkedin.com/in/ihtizaz-nasir-wp</span></a></li>
-      </ul>
-    </section>
+  <section class="card courses" id="courses">
+    <h2>Courses and certifications</h2>
+    <ul>
+      <li>Freelancing<small>DigiSkills</small></li>
+      <li>WordPress Development<small>DigiSkills</small></li>
+      <li>Entrepreneurship<small>Coursera</small></li>
+      <li>IELTS<small>Preparation course</small></li>
+      <li>Git and GitHub<small>Version control</small></li>
+      <li>Flutter App Development<small>Mobile development</small></li>
+    </ul>
+  </section>
 
-    <footer>Built by Ihtizaz Nasir, <span id="year"></span></footer>
-  </main>
-</div>
+  <section class="card contact" id="contact">
+    <h2>Contact</h2>
+    <p>Let’s build something.</p>
+    <a href="mailto:ihtizaznasir342@gmail.com"><small>Email</small><span>ihtizaznasir342@gmail.com</span></a>
+    <a href="tel:03414455158"><small>Phone</small><span>0341 4455158</span></a>
+    <a href="https://github.com/ihtizaznasir" target="_blank" rel="noopener"><small>GitHub</small><span>github.com/ihtizaznasir</span></a>
+    <a href="https://www.linkedin.com/in/ihtizaz-nasir-wp" target="_blank" rel="noopener"><small>LinkedIn</small><span>linkedin.com/in/ihtizaz-nasir-wp</span></a>
+  </section>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+</main>
 
-  // highlight the current section in the nav
-  const links = [...document.querySelectorAll('.side-nav a')];
-  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('on'));
-        const a = map.get(e.target.id);
-        if (a) a.classList.add('on');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  document.querySelectorAll('main#top, section[id]').forEach(s => io.observe(s));
-</script>
+<footer>Built by Ihtizaz Nasir, <span id="year"></span></footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
