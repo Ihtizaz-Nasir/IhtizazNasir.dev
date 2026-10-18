@@ -1,261 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ihtizaz Nasir — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#e4efe9;
-    --ink:#10261f;
-    --muted:#4d6a60;
-    --white:#ffffff;
-    --violet:#0a7a5b;
-    --violet-soft:#c6e6da;
-    --coral:#f4a9c4;
-    --sun:#f6d55c;
-    --display:'Unbounded','Trebuchet MS',sans-serif;
-    --body:'DM Sans','Segoe UI',sans-serif;
+    --bg:#101214;
+    --raise:#181b1e;
+    --line:#2a2e33;
+    --ink:#f2f0ea;
+    --muted:#9a9fa6;
+    --accent:#f5a300;
+    --accent-ink:#1a1200;
+    --glass:rgba(16,18,20,.7);
+    --serif:'Instrument Serif','Times New Roman',serif;
+    --sans:'Geist','Segoe UI',system-ui,sans-serif;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f6f2; --raise:#ffffff; --line:#dedbd2; --ink:#14161a; --muted:#5f636b;
+    --accent:#c27500; --accent-ink:#ffffff; --glass:rgba(247,246,242,.75);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:#07120e;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
   a{color:inherit;text-decoration:none}
-  :focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:8px}
-  ::selection{background:var(--violet);color:#fff}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
 
-  /* floating pill nav */
-  .nav{
-    position:sticky;top:14px;z-index:30;width:fit-content;max-width:calc(100% - 24px);margin:14px auto 0;
-    display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;
-    background:rgba(255,255,255,.85);backdrop-filter:blur(12px);box-shadow:0 10px 30px -12px rgba(16,38,31,.3);
-    overflow-x:auto;scrollbar-width:none;
-  }
-  .nav::-webkit-scrollbar{display:none}
-  .nav a{padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap;transition:background .15s,color .15s}
-  .nav a:hover{background:var(--violet-soft)}
-  .nav a.cta{background:var(--ink);color:#fff;margin-left:4px}
-  .nav a.cta:hover{background:var(--violet)}
-
-  .grid{
-    max-width:1120px;margin:28px auto 0;padding:0 20px 24px;
-    display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;
-  }
-  .card{background:var(--white);border-radius:26px;padding:30px;scroll-margin-top:90px}
-  .card h2{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.2;letter-spacing:-.01em;margin-bottom:18px}
-  .card p{color:var(--muted)}
-  .card strong{color:var(--ink);font-weight:600}
+  /* header */
+  header{position:sticky;top:0;z-index:40;background:var(--glass);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+  .logo{font-family:var(--serif);font-size:26px;letter-spacing:-.01em}
+  nav{display:flex;gap:6px}
+  nav a{padding:6px 12px;border-radius:8px;color:var(--muted);font-size:15px;font-weight:500;transition:color .15s,background .15s}
+  nav a:hover{color:var(--ink);background:var(--raise)}
+  .tools{display:flex;align-items:center;gap:10px}
+  .toggle{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:18px;transition:border-color .15s}
+  .toggle:hover{border-color:var(--accent)}
+  .cv{background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:15px;padding:9px 18px;border-radius:999px;transition:transform .15s}
+  .cv:hover{transform:translateY(-1px)}
+  @media (max-width:860px){nav{display:none}}
 
   /* hero */
-  .hero{grid-column:span 8;padding:44px 40px;border-radius:36px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:420px}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7.4vw,84px);line-height:.98;letter-spacing:-.045em}
-  .role{margin-top:18px;font-size:19px;font-weight:600;color:var(--violet)}
-  .bio{margin-top:10px;max-width:56ch}
-  .actions{display:flex;flex-wrap:wrap;gap:12px}
-  .btn{font-weight:700;font-size:15px;padding:13px 24px;border-radius:999px;transition:transform .15s,background .15s}
-  .btn:hover{transform:translateY(-2px)}
-  .btn.solid{background:var(--violet);color:#fff}
-  .btn.ghost{background:var(--bg)}
+  .hero{padding:96px 0 56px}
+  .status{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 12px;font-size:14.5px;color:var(--muted);margin-bottom:34px}
+  .status i{width:9px;height:9px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:ping 2.2s infinite}
+  @keyframes ping{70%{box-shadow:0 0 0 9px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,13vw,168px);line-height:.88;letter-spacing:-.035em}
+  h1 em{color:var(--accent)}
+  .lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;margin-top:48px;align-items:start}
+  .role{font-size:clamp(20px,2.4vw,26px);font-weight:500;line-height:1.35}
+  .bio{color:var(--muted);max-width:56ch}
+  @media (max-width:760px){.lead{grid-template-columns:1fr;gap:18px}}
 
-  /* status */
-  .status{grid-column:span 4;background:var(--sun);border-radius:36px;display:flex;flex-direction:column;justify-content:space-between;padding:34px}
-  .status .big{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.2vw,36px);line-height:1.1;letter-spacing:-.03em}
-  .status p{color:var(--ink);font-weight:500}
-  .pulse{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;background:var(--white);padding:8px 16px;border-radius:999px;width:fit-content}
-  .pulse i{width:10px;height:10px;border-radius:50%;background:#0a7a5b;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(10,122,91,.2)}}
+  /* marquee */
+  .marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;margin-top:48px;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .track{display:flex;gap:48px;width:max-content;animation:slide 28s linear infinite}
+  .track span{font-family:var(--serif);font-size:clamp(28px,4vw,44px);white-space:nowrap;color:var(--muted)}
+  .track span:nth-child(odd){color:var(--ink);font-style:italic}
+  @keyframes slide{to{transform:translateX(-50%)}}
 
-  .about{grid-column:span 7;display:grid;gap:14px}
-  .edu{grid-column:span 5;background:var(--violet);color:#fff}
-  .edu h2{color:#fff}
-  .edu-item + .edu-item{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.25)}
-  .edu-deg{font-weight:700;font-size:18px;line-height:1.3}
-  .edu-sch{color:#c9eadd;font-size:15.5px;margin-bottom:10px}
-  .tag{display:inline-block;background:rgba(255,255,255,.18);font-weight:600;font-size:14px;padding:5px 14px;border-radius:999px}
+  /* section rows */
+  section{padding:80px 0 0}
+  .row{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;align-items:start}
+  .row > h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,48px);line-height:1;letter-spacing:-.02em;position:sticky;top:96px}
+  @media (max-width:760px){.row{grid-template-columns:1fr;gap:22px}.row > h2{position:static}}
+  .prose{display:grid;gap:18px;color:var(--muted);max-width:62ch}
+  .prose strong{color:var(--ink);font-weight:600}
 
-  .exp{grid-column:span 6}
-  .job + .job{margin-top:20px;padding-top:20px;border-top:2px dashed var(--violet-soft)}
-  .job b{display:block;font-family:var(--display);font-weight:500;font-size:16px;line-height:1.3}
-  .job span{display:block;color:var(--violet);font-weight:700;margin:2px 0 6px}
-  .skills{grid-column:span 6}
+  .item{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;padding:24px 0;border-top:1px solid var(--line)}
+  .item:last-child{border-bottom:1px solid var(--line)}
+  .item h3{font-size:20px;font-weight:600;line-height:1.3}
+  .item .sub{color:var(--accent);font-weight:500}
+  .item p{color:var(--muted);flex-basis:100%;max-width:58ch;margin-top:4px}
+  .pill{align-self:start;border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:14px;color:var(--muted)}
+
   .chips{display:flex;flex-wrap:wrap;gap:10px}
-  .chip{font-weight:600;padding:9px 18px;border-radius:999px;background:var(--bg)}
-  .chip.core{background:var(--ink);color:#fff}
-  .chip.core:nth-child(2){background:var(--violet)}
-  .skills .note{margin-top:14px;font-size:15px}
+  .chip{border:1px solid var(--line);background:var(--raise);border-radius:12px;padding:12px 20px;font-weight:600;font-size:18px}
+  .chip.core{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .chip small{display:block;font-weight:400;font-size:13.5px;opacity:.75}
 
-  /* project */
-  .proj{grid-column:span 12;background:#12302a;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:36px;padding:44px 40px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:30px;align-items:center;overflow:hidden;position:relative}
-  .proj h2{color:var(--sun)}
-  .proj h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,42px);line-height:1.08;letter-spacing:-.035em;margin-bottom:16px}
-  .proj p{color:#b9d3c9}
-  .proj .stack{display:flex;gap:10px;margin-top:22px}
-  .proj .stack span{background:rgba(255,255,255,.12);padding:6px 16px;border-radius:999px;font-weight:600;font-size:15px}
-  .medal{
-    justify-self:center;width:210px;height:210px;border-radius:50%;background:var(--coral);color:var(--ink);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-    font-family:var(--display);transform:rotate(-8deg);box-shadow:0 0 0 14px rgba(244,169,196,.3);
-  }
-  .medal b{font-size:62px;font-weight:800;line-height:1;letter-spacing:-.05em}
-  .medal span{font-size:14px;font-weight:600;max-width:12ch;line-height:1.3;margin-top:6px}
+  .courses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .course{background:var(--raise);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-weight:600;line-height:1.35}
+  .course small{display:block;color:var(--muted);font-weight:400;font-size:14.5px}
+  @media (max-width:560px){.courses{grid-template-columns:1fr}}
 
-  .courses{grid-column:span 7}
-  .courses ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .courses li{background:var(--bg);border-radius:16px;padding:14px 16px;font-weight:600;line-height:1.35}
-  .courses li small{display:block;color:var(--muted);font-weight:500;font-size:14px}
-  .contact{grid-column:span 5;background:var(--coral);color:var(--ink)}
-  .contact p{color:var(--ink);margin-bottom:18px;font-weight:500}
-  .contact a{display:block;background:rgba(255,255,255,.9);border-radius:16px;padding:12px 16px;margin-top:10px;transition:transform .15s,background .15s}
-  .contact a:hover{transform:translateX(6px);background:#fff}
-  .contact small{display:block;font-size:13px;color:var(--muted);font-weight:500}
-  .contact span{font-weight:700;font-size:15.5px;word-break:break-word}
+  /* project: spotlight follows the pointer */
+  .project{--x:50%;--y:0%;position:relative;border:1px solid var(--line);border-radius:24px;padding:40px;background:
+    radial-gradient(420px circle at var(--x) var(--y),color-mix(in srgb,var(--accent) 22%,transparent),transparent 70%),var(--raise);overflow:hidden}
+  .project .top{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .project h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.02em;margin-bottom:16px}
+  .project p{color:var(--muted);max-width:56ch}
+  .badge{background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:14px;padding:5px 14px;border-radius:999px}
 
-  footer{text-align:center;color:#8fb0a3;font-size:14.5px;padding:8px 20px 44px}
+  /* contact */
+  .big-mail{display:block;font-family:var(--serif);font-size:clamp(30px,6vw,76px);line-height:1.05;letter-spacing:-.025em;word-break:break-word;border-bottom:2px solid var(--line);padding-bottom:18px;transition:color .2s,border-color .2s}
+  .big-mail:hover{color:var(--accent);border-color:var(--accent)}
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:28px}
+  .links a,.copy{display:block;background:var(--raise);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-align:left;transition:border-color .15s,transform .15s}
+  .links a:hover,.copy:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .links small{display:block;color:var(--muted);font-size:13.5px}
+  .links span{font-weight:600;word-break:break-word}
 
-  @media (max-width:900px){
-    .hero,.status,.about,.edu,.exp,.skills,.courses,.contact{grid-column:span 12}
-    .hero{min-height:0;padding:34px 26px}
-    .proj{grid-template-columns:1fr;padding:34px 26px}
-    .medal{width:170px;height:170px}.medal b{font-size:50px}
-  }
-  @media (max-width:560px){.courses ul{grid-template-columns:1fr}.card{padding:24px}}
+  footer{padding:80px 0 48px;color:var(--muted);font-size:14.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
 
-<nav class="nav" aria-label="Sections">
-  <a href="#about">About</a>
-  <a href="#experience">Experience</a>
-  <a href="#education">Education</a>
-  <a href="#skills">Skills</a>
-  <a href="#projects">Projects</a>
-  <a href="#courses">Courses</a>
-  <a class="cta" href="#contact">Contact</a>
-</nav>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top">Ihtizaz Nasir</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="toggle" id="theme" aria-label="Switch between dark and light theme">◐</button>
+      <a class="cv" href="IhtizaznasirCv.pdf" download>Download CV</a>
+    </div>
+  </div>
+</header>
 
-<main class="grid">
+<main class="wrap" id="top">
 
-  <section class="card hero">
-    <div>
-      <h1>Ihtizaz Nasir</h1>
-      <p class="role">Software engineering student, Flutter and Dart developer, freelancer</p>
+  <div class="hero">
+    <div class="status"><i></i>Interning at Internee.pk and open to freelance work</div>
+    <h1>Ihtizaz <em>Nasir</em></h1>
+    <div class="lead">
+      <p class="role">Software engineering student, Flutter and Dart developer, freelancer.</p>
       <p class="bio">
         BSc Software Engineering student at COMSATS University, building cross-platform apps with
         Flutter and Dart, shipping WordPress sites, and taking on freelance work through Upwork and Fiverr.
         Comfortable moving between Java, C, and mobile app development — currently interning at Internee.pk.
       </p>
     </div>
-    <div class="actions">
-      <a class="btn solid" href="IhtizaznasirCv.pdf" download>Download CV</a>
-      <a class="btn ghost" href="#projects">View projects</a>
-      <a class="btn ghost" href="mailto:ihtizaznasir342@gmail.com">Say hello</a>
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Flutter</span><span>Dart</span><span>Java</span><span>C</span><span>WordPress</span><span>Freelancing</span>
+        <span>Flutter</span><span>Dart</span><span>Java</span><span>C</span><span>WordPress</span><span>Freelancing</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="row">
+      <h2>About</h2>
+      <div class="prose">
+        <p>
+          I’m <strong>Ihtizaz Nasir</strong>, a Software Engineering student at
+          <strong>COMSATS University</strong>. My work sits at the intersection of mobile app
+          development and freelance client work — I build with <strong>Flutter and Dart</strong>,
+          maintain and customize <strong>WordPress</strong> sites, and pick up backend and systems
+          work in <strong>Java and C</strong> when a project calls for it.
+        </p>
+        <p>
+          Outside coursework, I freelance on <strong>Upwork and Fiverr</strong>, and I’m currently
+          getting hands-on industry experience as an <strong>Internee at Internee.pk</strong>. I like
+          projects that force me to ship something real end-to-end — my multi-vendor hotel management
+          app was one of those.
+        </p>
+      </div>
     </div>
   </section>
 
-  <aside class="card status">
-    <span class="pulse"><i></i>Available for work</span>
-    <div>
-      <div class="big">Interning at Internee.pk</div>
-      <p style="margin-top:10px">Open to internships, freelance work, and collaboration.</p>
-    </div>
-  </aside>
-
-  <section class="card about" id="about">
-    <h2>About</h2>
-    <p>
-      I’m <strong>Ihtizaz Nasir</strong>, a Software Engineering student at
-      <strong>COMSATS University</strong>. My work sits at the intersection of mobile app
-      development and freelance client work — I build with <strong>Flutter and Dart</strong>,
-      maintain and customize <strong>WordPress</strong> sites, and pick up backend and systems
-      work in <strong>Java and C</strong> when a project calls for it.
-    </p>
-    <p>
-      Outside coursework, I freelance on <strong>Upwork and Fiverr</strong>, and I’m currently
-      getting hands-on industry experience as an <strong>Internee at Internee.pk</strong>. I like
-      projects that force me to ship something real end-to-end — my multi-vendor hotel management
-      app was one of those.
-    </p>
-  </section>
-
-  <section class="card edu" id="education">
-    <h2>Education</h2>
-    <div class="edu-item">
-      <div class="edu-deg">BSc Software Engineering</div>
-      <div class="edu-sch">COMSATS University, ongoing</div>
-      <span class="tag">Honor Roll</span>
-    </div>
-    <div class="edu-item">
-      <div class="edu-deg">FSc (Pre-Engineering)</div>
-      <div class="edu-sch">Cadet College Karnal Sher Khan Campus</div>
-      <span class="tag">Academic Excellence Award</span>
+  <section id="experience">
+    <div class="row">
+      <h2>Experience</h2>
+      <div>
+        <div class="item">
+          <div><h3>Internee</h3><div class="sub">Internee.pk</div></div>
+          <span class="pill">Current</span>
+          <p>Working on real-world software engineering tasks as part of a structured internship program, building practical experience alongside coursework.</p>
+        </div>
+        <div class="item">
+          <div><h3>Freelance Developer</h3><div class="sub">Upwork and Fiverr</div></div>
+          <p>Delivering client projects spanning WordPress sites and Flutter app development — from initial requirements to final handoff.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="card exp" id="experience">
-    <h2>Experience</h2>
-    <div class="job">
-      <b>Internee</b><span>Internee.pk</span>
-      <p>Working on real-world software engineering tasks as part of a structured internship program, building practical experience alongside coursework.</p>
-    </div>
-    <div class="job">
-      <b>Freelance Developer</b><span>Upwork and Fiverr</span>
-      <p>Delivering client projects spanning WordPress sites and Flutter app development — from initial requirements to final handoff.</p>
+  <section id="education">
+    <div class="row">
+      <h2>Education</h2>
+      <div>
+        <div class="item">
+          <div><h3>BSc Software Engineering</h3><div class="sub">COMSATS University, ongoing</div></div>
+          <span class="pill">Honor Roll</span>
+        </div>
+        <div class="item">
+          <div><h3>FSc (Pre-Engineering)</h3><div class="sub">Cadet College Karnal Sher Khan Campus</div></div>
+          <span class="pill">Academic Excellence Award</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="card skills" id="skills">
-    <h2>Skills</h2>
-    <div class="chips">
-      <span class="chip core">Flutter</span>
-      <span class="chip core">Dart</span>
-      <span class="chip">Java</span>
-      <span class="chip">C</span>
-      <span class="chip">WordPress</span>
-      <span class="chip">Freelancing</span>
+  <section id="skills">
+    <div class="row">
+      <h2>Skills</h2>
+      <div class="chips">
+        <div class="chip core">Flutter<small>Cross-platform apps</small></div>
+        <div class="chip core">Dart<small>App logic and UI</small></div>
+        <div class="chip">Java</div>
+        <div class="chip">C</div>
+        <div class="chip">WordPress</div>
+        <div class="chip">Freelancing</div>
+      </div>
     </div>
-    <p class="note">Dark chips are my main stack: cross-platform apps, app logic and UI.</p>
   </section>
 
-  <section class="card proj" id="projects">
-    <div>
+  <section id="courses">
+    <div class="row">
+      <h2>Courses</h2>
+      <div class="courses">
+        <div class="course">Freelancing<small>DigiSkills</small></div>
+        <div class="course">WordPress Development<small>DigiSkills</small></div>
+        <div class="course">Entrepreneurship<small>Coursera</small></div>
+        <div class="course">IELTS<small>Preparation course</small></div>
+        <div class="course">Git and GitHub<small>Version control</small></div>
+        <div class="course">Flutter App Development<small>Mobile development</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="row">
       <h2>Projects</h2>
-      <h3>Multi-Vendor Hotel Management App</h3>
-      <p>A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system. Placed 3rd in an app development competition.</p>
-      <div class="stack"><span>Flutter</span><span>Dart</span></div>
+      <article class="project" id="spot">
+        <div class="top"><span class="badge">3rd place, app development competition</span></div>
+        <h3>Multi-Vendor Hotel Management App</h3>
+        <p>A mobile app supporting multiple hotel vendors on one platform — covering vendor listings, bookings, and management in a single system.</p>
+        <div class="top" style="margin:22px 0 0"><span class="pill">Flutter</span><span class="pill">Dart</span></div>
+      </article>
     </div>
-    <div class="medal" aria-label="Third place in an app development competition">
-      <b>3rd</b><span>place, app development competition</span>
+  </section>
+
+  <section id="contact">
+    <div class="row">
+      <h2>Contact</h2>
+      <div>
+        <p class="prose" style="margin-bottom:22px">Open to internships, freelance work, and collaboration.</p>
+        <a class="big-mail" href="mailto:ihtizaznasir342@gmail.com">ihtizaznasir342@gmail.com</a>
+        <div class="links">
+          <button class="copy" id="copy" type="button"><small>Email</small><span id="copyText">Copy email address</span></button>
+          <a href="tel:03414455158"><small>Phone</small><span>0341 4455158</span></a>
+          <a href="https://github.com/ihtizaznasir" target="_blank" rel="noopener"><small>GitHub</small><span>github.com/ihtizaznasir</span></a>
+          <a href="https://www.linkedin.com/in/ihtizaz-nasir-wp" target="_blank" rel="noopener"><small>LinkedIn</small><span>linkedin.com/in/ihtizaz-nasir-wp</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="card courses" id="courses">
-    <h2>Courses and certifications</h2>
-    <ul>
-      <li>Freelancing<small>DigiSkills</small></li>
-      <li>WordPress Development<small>DigiSkills</small></li>
-      <li>Entrepreneurship<small>Coursera</small></li>
-      <li>IELTS<small>Preparation course</small></li>
-      <li>Git and GitHub<small>Version control</small></li>
-      <li>Flutter App Development<small>Mobile development</small></li>
-    </ul>
-  </section>
-
-  <section class="card contact" id="contact">
-    <h2>Contact</h2>
-    <p>Let’s build something.</p>
-    <a href="mailto:ihtizaznasir342@gmail.com"><small>Email</small><span>ihtizaznasir342@gmail.com</span></a>
-    <a href="tel:03414455158"><small>Phone</small><span>0341 4455158</span></a>
-    <a href="https://github.com/ihtizaznasir" target="_blank" rel="noopener"><small>GitHub</small><span>github.com/ihtizaznasir</span></a>
-    <a href="https://www.linkedin.com/in/ihtizaz-nasir-wp" target="_blank" rel="noopener"><small>LinkedIn</small><span>linkedin.com/in/ihtizaz-nasir-wp</span></a>
-  </section>
-
+  <footer><span>Built by Ihtizaz Nasir</span><span id="year"></span></footer>
 </main>
 
-<footer>Built by Ihtizaz Nasir, <span id="year"></span></footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // theme: remembered choice, else system preference
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  root.dataset.theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.getElementById('theme').addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // project spotlight follows the pointer
+  const spot = document.getElementById('spot');
+  spot.addEventListener('pointermove', e => {
+    const r = spot.getBoundingClientRect();
+    spot.style.setProperty('--x', (e.clientX - r.left) + 'px');
+    spot.style.setProperty('--y', (e.clientY - r.top) + 'px');
+  });
+
+  // copy email
+  document.getElementById('copy').addEventListener('click', async () => {
+    const t = document.getElementById('copyText');
+    try { await navigator.clipboard.writeText('ihtizaznasir342@gmail.com'); t.textContent = 'Copied'; }
+    catch (e) { t.textContent = 'Press and hold the address above to copy'; }
+    setTimeout(() => t.textContent = 'Copy email address', 2200);
+  });
+</script>
 </body>
 </html>
